@@ -16,7 +16,8 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-
+gem 'versionist'
+gem 'faraday'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
