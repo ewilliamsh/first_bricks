@@ -4,9 +4,10 @@ module Ob
 			module ClassMethods
 				def find(id) 
 					instance = self.new(id)
-					puts url
 					response = Requestor.new.request(:get, instance.url)
-					response
+					instance.create_methods response
+					instance.set_attributes response
+					instance
 				end
 			end
 			def self.included(base)

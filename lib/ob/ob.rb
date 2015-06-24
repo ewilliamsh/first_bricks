@@ -8,7 +8,7 @@ require "./lib/ob/operations/exec"
 
 require "./lib/ob/ob_object"
 require "./lib/ob/resource"
-
+require 'meth_creator'
 Dir['./lib/ob/wrappers/*.rb'].each do |file| 
 	puts "importing #{file}" 
 	require file 

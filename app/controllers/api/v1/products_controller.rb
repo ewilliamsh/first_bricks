@@ -11,15 +11,7 @@ class Api::V1::ProductsController < Api::V1::BaseController
 
 	def show
 		plain_result = Ob::Product.find(params[:id])
-		product = {
-			product: {
-				name: plain_result[:name],
-				created_at: plain_result[:creationDate],
-				search_key: plain_result[:searchKey],
-				description: plain_result[:description]
-			}
-		}
-		render json: product
+		render json: plain_result, serializer: ProductSerializer
 	end
 	def update
 		
