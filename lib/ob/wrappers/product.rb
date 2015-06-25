@@ -2,15 +2,15 @@ require 'ostruct'
 module Ob
 		class Product < Resource
 			include Ob::Operations::Find
+			include Ob::Operations::All
 			include Ob::Operations::Where
 			include Ob::Operations::Exec
-		  include ActiveModel::Serializers::JSON
-		  include MethCreator
+			include Ob::Operations::Delete
+			include Ob::Operations::Update
 			#include RubyOb::Operationsa::Create
-			#include RubyOb::Operations::Delete
-			#include RubyOb::Operations::Update
 			#include RubyOb::Operations::CustumAction
 			#include RubyOb::Operations::CreateMember
-			
+			include ActiveModel::Serializers::JSON
+			include MethCreator
 		end	
 end
