@@ -12,7 +12,6 @@ RSpec.describe Ob::Product do
 				@products = Ob::Product.all
 			end
 			it "should be an array" do
-				
 				@products.should be_kind_of(Array)
 			end
 			it "the first elem should be a Product" do
