@@ -47,13 +47,13 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!  
-  config.extend VCR::RSpec::Macros
+  
 
 end
-
-VCR.configure do |c|
+#config.extend VCR::RSpec::Macros
+#VCR.configure do |c|
   #the directory where your cassettes will be saved
-  c.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
+  #c.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
   # your HTTP request service. You can also use fakeweb, webmock, and more
-  c.hook_into :typhoeus
-end
+  #c.hook_into :typhoeus
+#end

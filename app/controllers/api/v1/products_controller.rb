@@ -7,6 +7,7 @@ class Api::V1::ProductsController < Api::V1::BaseController
 
 	def show
 		product = Ob::Product.find(params[:id])
+		binding.pry
 		render json: product, serializer: ProductSerializer, status: :ok
 	end
 	def update

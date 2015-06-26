@@ -1,16 +1,15 @@
 require 'faraday'
 
-require "./lib/ob/version"
+require "./app/classes/ob/version"
 
-require "./lib/ob/operations/find"
-require "./lib/ob/operations/where"
-require "./lib/ob/operations/exec"
+require "./app/classes/ob/operations/find"
+require "./app/classes/ob/operations/where"
+require "./app/classes/ob/operations/exec"
 
-require "./lib/ob/ob_object"
-require "./lib/ob/resource"
-require 'meth_creator'
-Dir['./lib/ob/wrappers/*.rb'].each do |file| 
-	puts "importing #{file}" 
+require "./app/classes/ob/ob_object"
+require "./app/classes/ob/resource"
+require './app/classes/ob/meth_creator'
+Dir['./app/classes/ob/wrappers/*.rb'].each do |file| 
 	require file 
 end
 

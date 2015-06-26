@@ -1,4 +1,4 @@
-require './lib/ob/ob'
+require './app/classes/ob/ob'
 class Api::V1::BaseController < ApplicationController
 	protect_from_forgery with: :null_session
 	Ob.api_base = ENV['OB_API']
