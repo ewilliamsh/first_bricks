@@ -1,37 +1,37 @@
 
 class Api::V1::ProductsController < Api::V1::BaseController
 	def index
-		plain_result = Ob::Product.all
-		render json: plain_result
+		products = Ob::Product.all
+		render json: products, status: :ok
 	end
 
 	def show
 		product = Ob::Product.find(params[:id])
-		render json: product, serializer: ProductSerializer
+		render json: product, serializer: ProductSerializer, status: :ok
 	end
 	def update
 		product = Ob::Product.new params[:id]
 		product_response = product.update params[:product]
-		render json: product_response, serializer: ProductSerializer
+		render json: product_response, serializer: ProductSerializer, status: :ok
 	end
 	def destroy
 		product = Ob::Product.delete(params[:id])
-		if product.has_key? :response
-			if product[:response].has_key? :error
+		if product.has_key?(:response) && product[:response].has_key?(:error)
 			render json: { product: {errors: product[:response][:error]} },
 										status: :unprocessable_entity
-			else
-				head :no_content
-			end	
 		else
 			head :no_content
 		end
-		
 	end
 	def create
-		puts params
 		product = Ob::Product.create(params[:product])
-		render json: product, serializer: ProductSerializer
+
+		if product.class.method_defined? :error_messages
+			render json: { product: { errors: product.error_messages} },
+										status: :unprocessable_entity
+		else			
+			render json: product, serializer: ProductSerializer, status: :created
+		end
 	end
 	private 
 	def product_params

@@ -7,7 +7,7 @@ module Ob
 			include Ob::Operations::Exec
 			include Ob::Operations::Delete
 			include Ob::Operations::Update
-			#include RubyOb::Operationsa::Create
+			include Ob::Operations::Create
 			#include RubyOb::Operations::CustumAction
 			#include RubyOb::Operations::CreateMember
 			include ActiveModel::Serializers::JSON

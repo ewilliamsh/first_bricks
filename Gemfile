@@ -19,6 +19,8 @@ gem 'jquery-rails'
 gem 'versionist'
 gem 'faraday'
 gem 'active_model_serializers', '0.8.3'
+gem 'typhoeus', '0.4.2'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -35,6 +37,7 @@ group :development, :test do
   gem "pry-rails"
   gem "rspec-rails", "~> 3.1.0"
   gem "ffaker"
+  gem 'vcr', '2.2.5'
 end
 
 # Test gems

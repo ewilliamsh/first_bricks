@@ -36,7 +36,7 @@ module Ob
 					faraday.basic_auth(self.user, self.password)
 				end
 				
-				if params 
+				if params && meth != :put && meth != :post
 					if params.class == Hash
 						conn.params = params
 					end
@@ -49,6 +49,12 @@ module Ob
 						puts "printing body"
 						puts req.body
 					end
+				elsif meth == :post
+					response = conn.post do |req|
+						req.headers['Content-Type'] = 'text/xml'
+						req.body = params.to_json
+						#req.options.timeout = 5
+					end
 				else
 					response = conn.method(meth).call
 				end
@@ -56,8 +62,7 @@ module Ob
 					puts "error status code is #{response.status}"
 				end
 				if url.include? "json"
-					#puts "response"
-					#puts response.body
+
 					return JSON.parse response.body, symbolize_names: true
 				else
 					return response.body
