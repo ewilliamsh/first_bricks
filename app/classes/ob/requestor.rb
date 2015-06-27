@@ -32,7 +32,7 @@ module Ob
 			begin
 				conn = Faraday.new :url => url do |faraday|
 					faraday.adapter  Faraday.default_adapter
-					faraday.response :logger
+					#faraday.response :logger
 					faraday.basic_auth(self.user, self.password)
 				end
 				
@@ -46,8 +46,6 @@ module Ob
 					response = conn.put do |req|
 						req.headers['Content-Type'] = 'text/xml'
 						req.body = params.to_json
-						puts "printing body"
-						puts req.body
 					end
 				elsif meth == :post
 					response = conn.post do |req|

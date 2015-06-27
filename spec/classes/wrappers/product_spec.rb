@@ -61,4 +61,20 @@ RSpec.describe Ob::Product do
 			end
 		end
 	end
+	describe ".where" do
+		context "when the server is up" do
+			Ob.api_base = ENV['OB_API']
+			Ob.user= ENV['OB_USERNAME']
+			Ob.password=ENV['OB_PASSWORD']
+			#{}"_where"
+			products = Ob::Product.where name: 'Jesus Lerma'
+			it "should return an array" do
+				products.should be_kind_of(Array)
+			end
+			it "the first elem of returned array should be Ob::Product" do
+				product = products.first
+				product.should be_kind_of Ob::Product
+			end
+		end
+	end	
 end
