@@ -5,20 +5,14 @@ require './app/classes/ob/ob'
 RSpec.describe Ob::Product do
 	describe ".all" do
 		context "when the server is up" do
-			before do
-				Ob.api_base = ENV['OB_API']
-				Ob.user= ENV['OB_USERNAME']
-				Ob.password=ENV['OB_PASSWORD']
-				@products = Ob::Product.all
-			end
+			Ob.api_base = ENV['OB_API']
+			Ob.user= ENV['OB_USERNAME']
+			Ob.password=ENV['OB_PASSWORD']
+			products = Ob::Product.all
 			it "should be an array" do
-				@products.should be_kind_of(Array)
+				products.should be_kind_of(Array)
 			end
 			it "the first elem should be a Product" do
-				Ob.api_base = ENV['OB_API']
-				Ob.user= ENV['OB_USERNAME']
-				Ob.password=ENV['OB_PASSWORD']
-				products = Ob::Product.all
 				first_product = products.first
 				first_product.should be_kind_of Ob::Product
 			end
@@ -66,7 +60,6 @@ RSpec.describe Ob::Product do
 			Ob.api_base = ENV['OB_API']
 			Ob.user= ENV['OB_USERNAME']
 			Ob.password=ENV['OB_PASSWORD']
-			#{}"_where"
 			products = Ob::Product.where name: 'Jesus Lerma'
 			it "should return an array" do
 				products.should be_kind_of(Array)

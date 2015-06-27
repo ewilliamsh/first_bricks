@@ -9,6 +9,7 @@ require "./app/classes/ob/operations/exec"
 require "./app/classes/ob/ob_object"
 require "./app/classes/ob/resource"
 require './app/classes/ob/meth_creator'
+require './app/classes/ob/common_meths'
 Dir['./app/classes/ob/wrappers/*.rb'].each do |file| 
 	require file 
 end

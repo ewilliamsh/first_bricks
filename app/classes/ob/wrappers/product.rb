@@ -10,5 +10,6 @@ module Ob
 			include Ob::Operations::Create
 			include ActiveModel::Serializers::JSON
 			include MethCreator
+			include CommonMeths
 		end	
 end
