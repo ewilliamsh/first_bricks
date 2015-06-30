@@ -32,7 +32,7 @@ module Ob
 			begin
 				conn = Faraday.new :url => url do |faraday|
 					faraday.adapter  Faraday.default_adapter
-					#faraday.response :logger
+					faraday.response :logger
 					faraday.basic_auth(self.user, self.password)
 				end
 				

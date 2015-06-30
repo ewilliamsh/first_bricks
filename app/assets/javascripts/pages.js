@@ -140,7 +140,8 @@ $(document).ready( function(){
                 dataType : 'json',
                 url: "/api/products/",
                 success: function(datox){
-                //console.log(datox);
+                console.log('printing datox');
+                console.log(datox);
                 waTable.setData(jsonConstructor(datox)); 
                 //document.getElementById("loader-wrapper").style.display = "none";
                 document.body.style.overflowY = "scroll"; 

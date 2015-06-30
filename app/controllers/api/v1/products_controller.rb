@@ -1,8 +1,8 @@
 
 class Api::V1::ProductsController < Api::V1::BaseController
 	def index
-		products = Ob::Product.all
-		render json: products, status: :ok
+		products = Ob::Product.where(name:"Jesus Lerma")
+		render json: products, each_serializer: ProductSerializer, status: :ok
 	end
 
 	def show

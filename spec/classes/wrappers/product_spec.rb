@@ -70,4 +70,10 @@ RSpec.describe Ob::Product do
 			end
 		end
 	end	
+	describe "when the site returns a 503 http code" do
+	  it "is implemented but waiting" do
+	    pending("something else getting finished")
+	    this_should_not_get_executed
+	  end
+	end
 end
