@@ -11,6 +11,8 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
 //= require_tree .
 //= require ember.prod.js
+//= require jquery.watable
+//= require bootstrap-datepicker
+//= require bootstrap

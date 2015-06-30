@@ -51,3 +51,6 @@ group :production, :staging do
   gem "rails_12factor"
   gem "exception_notification"
 end
+
+gem 'bootstrap-sass'
+
