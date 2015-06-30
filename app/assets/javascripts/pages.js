@@ -30,17 +30,6 @@ function llamaAjax(){
                   datePicker: true
                 }
             },
-           /*actions: {                //This generates a button where you can add elements.
-                filter: true,         //If true, the filter fields can be toggled visible and hidden.
-                columnPicker: true,   //if true, the columnPicker can be toggled visible and hidden.
-                custom: [             //Add any other elements here. Here is a refresh and export example.
-                  $('<a href="#" class="refresh"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Refrescar</a>'),
-                  $('<a href="#" class="export all"><span class="glyphicon glyphicon-share"></span>&nbsp;Exportar todas las filas</a>'),
-                  $('<a href="#" class="export checked"><span class="glyphicon glyphicon-share"></span>&nbsp;Exportar filas chequeadas</a>'),
-                  $('<a href="#" class="export filtered"><span class="glyphicon glyphicon-share"></span>&nbsp;Exportar filas filtradas</a>'),
-                  $('<a href="#" class="export rendered"><span class="glyphicon glyphicon-share"></span>&nbsp;Exportar filas rendereadas</a>')
-                ]
-            }, */
             tableCreated: function(data) {
                 console.log('table created');
                 console.log(data);
@@ -68,24 +57,25 @@ function llamaAjax(){
         }).data('WATable');
 
         console.log("$> Consumir Servicio");
-        /*var datox = {};
+        var datox = {};
         $.ajax({
                 type:"GET",
                 dataType : 'json',
-                url: "/api/products/FF975ED698374C768F39217FA6ED4DFB",
+                url: "/api/products/",
                 success: function(datox){
+                //console.log(datox);
                 waTable.setData(jsonConstructor(datox)); 
-                document.getElementById("loader-wrapper").style.display = "none";
+                //document.getElementById("loader-wrapper").style.display = "none";
                 document.body.style.overflowY = "scroll"; 
             },
                 error:  function(){ 
                 var mensajeError = '<br><br><br><div align="center"><h1>Ups!! algo ha salido mal.</h1><h3>No ha sido posible entablar comunicación, por favor comuniquese con su proveedor.</h3></div>'
                 document.getElementById("lst_fac").innerHTML = mensajeError;
                 }
-        });*/
+        });
  }
 
-/*$(document).ready( function(){
+$(document).ready( function(){
     console.log("ready");
 //llamaajax
             var waTable = $('#lst_fac').WATable({
@@ -117,17 +107,6 @@ function llamaAjax(){
                   datePicker: true
                 }
             },
-           / *actions: {                //This generates a button where you can add elements.
-                filter: true,         //If true, the filter fields can be toggled visible and hidden.
-                columnPicker: true,   //if true, the columnPicker can be toggled visible and hidden.
-                custom: [             //Add any other elements here. Here is a refresh and export example.
-                  $('<a href="#" class="refresh"><span class="glyphicon glyphicon-refresh"></span>&nbsp;Refrescar</a>'),
-                  $('<a href="#" class="export all"><span class="glyphicon glyphicon-share"></span>&nbsp;Exportar todas las filas</a>'),
-                  $('<a href="#" class="export checked"><span class="glyphicon glyphicon-share"></span>&nbsp;Exportar filas chequeadas</a>'),
-                  $('<a href="#" class="export filtered"><span class="glyphicon glyphicon-share"></span>&nbsp;Exportar filas filtradas</a>'),
-                  $('<a href="#" class="export rendered"><span class="glyphicon glyphicon-share"></span>&nbsp;Exportar filas rendereadas</a>')
-                ]
-            }, * /
             tableCreated: function(data) {
                 console.log('table created');
                 console.log(data);
@@ -155,90 +134,50 @@ function llamaAjax(){
         }).data('WATable');
 
         console.log("$> Consumir Servicio");
-        / *var datox = {};
+        var datox = {};
         $.ajax({
                 type:"GET",
                 dataType : 'json',
-                url: "/api/products/FF975ED698374C768F39217FA6ED4DFB",
+                url: "/api/products/",
                 success: function(datox){
+                //console.log(datox);
                 waTable.setData(jsonConstructor(datox)); 
-                document.getElementById("loader-wrapper").style.display = "none";
+                //document.getElementById("loader-wrapper").style.display = "none";
                 document.body.style.overflowY = "scroll"; 
             },
                 error:  function(){ 
                 var mensajeError = '<br><br><br><div align="center"><h1>Ups!! algo ha salido mal.</h1><h3>No ha sido posible entablar comunicación, por favor comuniquese con su proveedor.</h3></div>'
                 document.getElementById("lst_fac").innerHTML = mensajeError;
                 }
-        });* /
- }
-);*/
+        });
+ 
+});
 
 function jsonConstructor(json) {
     var rows = [];
-    var jsonObject = json.response;
-    /*for (var i=0;i<jsonObject.totalRows;i++) {
-        var strDate = JSON.stringify(jsonObject.data[i].dateinvoiced);
-        var strPagado = JSON.stringify(jsonObject.data[i].pagado);
-        var pagado = "";
-        jsDate = new Date(strDate);
-        var dia = jsDate.getDate();
-        var mes = jsDate.getMonth();
-        var ano = jsDate.getFullYear()
-        var row = {};
-        // validar pago
-        if (strPagado == "true") {
-            row.Pagado = true;
-        } else {
-            row.Pagado = false;
-        }
-        row.Factura_ID = jsonObject.data[i].id;
-        row.Docstatus = jsonObject.data[i].docstatus;
-        row.Factura =   jsonObject.data[i].documentno;
-        //row.Subtotal =  jsonObject.data[i].totallines;
-        row.Subtotal = separaMiles(parseFloat(JSON.stringify(jsonObject.data[i].totallines)).toFixed(2));
-        //row.Impuesto =  jsonObject.data[i].impuesto;
-        row.Impuesto = separaMiles(parseFloat(JSON.stringify(jsonObject.data[i].impuesto)).toFixed(2));
-        //row.Total =     jsonObject.data[i].grandtotal;
-        row.Total = separaMiles(parseFloat(JSON.stringify(jsonObject.data[i].grandtotal)).toFixed(2));
-        row.Fecha = Date.UTC(ano, mes, dia);
-        //row.Pagado = pagado;
-        //row.Pendiente = jsonObject.data[i].pendiente;
-        row.Pendiente = separaMiles(parseFloat(JSON.stringify(jsonObject.data[i].pendiente)).toFixed(2));
-        row["row-checkable"] = true;
-        row["row-checked"]   = false;
-        row["row-cls"]       = "";
-
-        rows.push(row);
-    } 
-    */
+    console.log("$> jsonConstructor");
+    console.log(json);
+    console.log("$> json[] parse");
+    //console.log(JSON.stringity(json));
+    console.log(JSON.parse(json));
+    
+    var jsonObject = JSON.parse(json); //json.response;
+    console.log(jsonObject);
+    
     for (var i=0;i<jsonObject.totalRows;i++) {
-        var strDate = JSON.stringify(jsonObject.data[i].dateinvoiced);
-        var strPagado = JSON.stringify(jsonObject.data[i].pagado);
-        var pagado = "";
+        var strDate = JSON.stringify(jsonObject.data[i].creationDate);
+
         jsDate = new Date(strDate);
         var dia = jsDate.getDate();
         var mes = jsDate.getMonth();
         var ano = jsDate.getFullYear()
         var row = {};
-        // validar pago
-        if (strPagado == "true") {
-            row.Pagado = true;
-        } else {
-            row.Pagado = false;
-        }
-        row.Factura_ID = jsonObject.data[i].id;
-        row.Docstatus = jsonObject.data[i].docstatus;
-        row.Factura =   jsonObject.data[i].documentno;
-        //row.Subtotal =  jsonObject.data[i].totallines;
-        row.Subtotal = separaMiles(parseFloat(JSON.stringify(jsonObject.data[i].totallines)).toFixed(2));
-        //row.Impuesto =  jsonObject.data[i].impuesto;
-        row.Impuesto = separaMiles(parseFloat(JSON.stringify(jsonObject.data[i].impuesto)).toFixed(2));
-        //row.Total =     jsonObject.data[i].grandtotal;
-        row.Total = separaMiles(parseFloat(JSON.stringify(jsonObject.data[i].grandtotal)).toFixed(2));
+        row.Producto_ID = jsonObject.data[i].id;
+        row.Name = jsonObject.data[i].name;
+        row.Value = jsonObject.data[i].searchKey;
+        row.Sku = jsonObject.data[i].sku;
         row.Fecha = Date.UTC(ano, mes, dia);
-        //row.Pagado = pagado;
-        //row.Pendiente = jsonObject.data[i].pendiente;
-        row.Pendiente = separaMiles(parseFloat(JSON.stringify(jsonObject.data[i].pendiente)).toFixed(2));
+
         row["row-checkable"] = true;
         row["row-checked"]   = false;
         row["row-cls"]       = "";
@@ -247,67 +186,36 @@ function jsonConstructor(json) {
     }
     // Definir columnas
     var cols = {
-        Factura: {
+        Name: {
             index: 1,
             type: "string",
-            friendly: "# Factura",
+            friendly: "# Nombre",
             unique: true,
             sortOrder: "asc",
             filter: false
         },
-        Subtotal: {
+        Value: {
             index: 2,
             type: "string",
-            friendly: "",
+            friendly: "# Identificador",
             cls: "montos", //apply some css classes
             placeHolder: "",
             format: "$ {0}" 
         },
-        Impuesto: {
+        Sku: {
             index: 3,
             type: "string",
             friendly: "",
-            cls: "montos", //apply some css classes
-            placeHolder: "",
-            format: "$ {0}"
+            unique: true,
+            filter: false
         },
-        Total: {
+        Fecha: {
             index: 4,
-            type: "string",
-            friendly: "",
-            cls: "montos", //apply some css classes
-            placeHolder: "",
-            format: "$ {0}"
+            type: "date",
+            dateFormat: "yyyy-MM-dd" 
         },
-         Fecha: {
+        Producto_ID: {
             index: 5,
-            type: "date", //Don't forget dates are expressed in milliseconds
-            dateFormat: "yyyy-MM-dd", //Special date format
-            friendly: "Fecha",
-            placeHolder: "Las facturas màs antiguas se ven primero."
-        },
-        Docstatus: {
-            index: 6,
-            type: "string",
-            friendly: "Estado",
-            placeHolder: ""
-        },
-        Pagado: {
-            index: 7,
-            type: "bool",
-            friendly: "Pagado",
-            placeHolder: ""
-        },
-        Pendiente: {
-            index: 8,
-            type: "string",
-            friendly: "",
-            cls: "montos", //apply some css classes
-            placeHolder: "",
-            format: "$ {0}"
-        },
-        Factura_ID: {
-            index: 8,
             type: "string",
             friendly: "ID",
             hidden: true
