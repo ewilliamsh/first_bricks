@@ -1,10 +1,10 @@
 module Ob
 	module Operations
-		module Where
+		module Delete
 			module ClassMethods
-				def where(params=nil)
-					instance = ObObject.new
-					response = Requestor.new.request(:get, url, params)
+				def delete(id) 
+					instance = self.new(id)
+					response = Requestor.new.request(:delete, instance.url)
 					response
 				end
 			end

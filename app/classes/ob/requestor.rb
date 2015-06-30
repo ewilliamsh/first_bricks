@@ -22,7 +22,6 @@ module Ob
 		end
 		def request(meth, url, params=nil)
 			url = self.api_url(url)
-			puts "http en requestor #{url}"
 			meth = meth.downcase
 			if params 
 				if params.class != Hash
@@ -33,30 +32,44 @@ module Ob
 			begin
 				conn = Faraday.new :url => url do |faraday|
 					faraday.adapter  Faraday.default_adapter
+					faraday.response :logger
 					faraday.basic_auth(self.user, self.password)
 				end
 				
-				if params 
+				if params && meth != :put && meth != :post
 					if params.class == Hash
 						conn.params = params
 					end
 				end
+				
+				if meth == :put
+					response = conn.put do |req|
+						req.headers['Content-Type'] = 'text/xml'
+						req.body = params.to_json
+					end
+				elsif meth == :post
+					response = conn.post do |req|
+						req.headers['Content-Type'] = 'text/xml'
+						req.body = params.to_json
+						#req.options.timeout = 5
+					end
+				else
+					response = conn.method(meth).call
+				end
+				if response.status != 200
+					puts "error status code is #{response.status}"
+				end
+				if url.include? "json"
 
-				puts url
-				response = conn.method(meth).call
-
+					return JSON.parse response.body, symbolize_names: true
+				else
+					return response.body
+				end
 			rescue Exception => e
+				puts url
+				puts "#{@user}:#{@password}"
 				puts e
-			end
-			if response.status != 200
-				puts "error status code is #{response.status}"
-			end
-			if url.include? "json"
-				#puts "response"
-				#puts response.body
-				return JSON.parse response.body, symbolize_names: true
-			else
-				return response.body
+				puts "#{@user}:#{@password}"
 			end
 		end
 	end

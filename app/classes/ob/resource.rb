@@ -6,5 +6,8 @@ module Ob
 		def url
 			return [self.class.url, id].join('/')
 		end
+		def ob_hash params
+			{data: params}
+		end
 	end
 end
