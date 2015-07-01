@@ -161,9 +161,13 @@
           background-color: #d3d3d3 !important;
         }        
     </style>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'application', media: 'all', 
+    'data-turbolinks-track' => true %>
+  <link href="<%= stylesheet_path(Stylesheet.first) + '.css' %>" 
+    rel="stylesheet" type="text/css" />
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
 </head>
 <body>
 

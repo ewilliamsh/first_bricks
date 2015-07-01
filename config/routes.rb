@@ -16,4 +16,5 @@ Rails.application.routes.draw do
       resources :products, only: [:index, :show, :update, :destroy, :create]
     end
   end
+  resources :stylesheets
 end
