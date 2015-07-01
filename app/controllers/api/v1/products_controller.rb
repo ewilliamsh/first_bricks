@@ -1,18 +1,17 @@
 
 class Api::V1::ProductsController < Api::V1::BaseController
 	def index
-		products = Ob::Product.where(name:"Jesus Lerma")
+		products = Ob::Product.all
 		render json: products, each_serializer: ProductSerializer, status: :ok
 	end
 
 	def show
 		product = Ob::Product.find(params[:id])
-		binding.pry
 		render json: product, serializer: ProductSerializer, status: :ok
 	end
 	def update
 		product = Ob::Product.new params[:id]
-		product_response = product.update params[:product]
+		product_response = product.update(params[:product], id: params[:id])
 		render json: product_response, serializer: ProductSerializer, status: :ok
 	end
 	def destroy
