@@ -46,6 +46,7 @@ module Ob
 					response = conn.put do |req|
 						req.headers['Content-Type'] = 'text/xml'
 						req.body = params.to_json
+						binding.pry
 					end
 				elsif meth == :post
 					response = conn.post do |req|
