@@ -160,31 +160,36 @@ function jsonConstructor(json) {
     console.log(json);
     console.log("$> json[] parse");
     //console.log(JSON.stringity(json));
-    console.log(JSON.parse(json));
+    //console.log(JSON.parse(json));
     
-    var jsonObject = JSON.parse(json); //json.response;
+    var jsonObject = json.products;
     console.log(jsonObject);
     
-    for (var i=0;i<jsonObject.totalRows;i++) {
-        var strDate = JSON.stringify(jsonObject.data[i].creationDate);
+    //for (var i=0;i<jsonObject.totalRows;i++) {
+        $.each(jsonObject,function(index, product){
+        var strDate = JSON.stringify(product.creationDate);
+        console.log(product.creationDate);
 
-        jsDate = new Date(strDate);
+        jsDate = new Date(product.creationDate);
+        console.log(strDate);
+        console.log(jsDate);
         var dia = jsDate.getDate();
         var mes = jsDate.getMonth();
         var ano = jsDate.getFullYear()
         var row = {};
-        row.Producto_ID = jsonObject.data[i].id;
-        row.Name = jsonObject.data[i].name;
-        row.Value = jsonObject.data[i].searchKey;
-        row.Sku = jsonObject.data[i].sku;
+        row.Producto_ID = product.id;
+        row.Name = product.name;
+        row.Value = product.searchKey;
+        row.Sku = product.sku;
         row.Fecha = Date.UTC(ano, mes, dia);
+        console.log(Date.UTC(ano, mes, dia));
 
         row["row-checkable"] = true;
         row["row-checked"]   = false;
         row["row-cls"]       = "";
 
         rows.push(row);
-    }
+    })
     // Definir columnas
     var cols = {
         Name: {

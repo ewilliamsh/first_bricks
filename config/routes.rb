@@ -14,6 +14,7 @@ Rails.application.routes.draw do
       :default => true
     ) do
       resources :products, only: [:index, :show, :update, :destroy, :create]
+      resources :business_partners, only: [:index, :show, :destroy, :update, :create]
     end
   end
   resources :stylesheets
